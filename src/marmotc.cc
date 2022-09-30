@@ -1,7 +1,16 @@
 #include <iostream>
 
-int main() {
-    std::cout << "Marmot Programming Language Compiler" << std::endl;
-    std::cout << "Version: 2020.0.0-alpha" << std::endl;
-    return 0;
+#include "compiler.h"
+#include "version.h"
+
+using namespace marmot;
+
+int main(int argc, char *argv[]) {
+  version::print();
+
+  for (int i = 1; i < argc; i++) {
+    compiler::compile(argv[i]);
+  }
+
+  return 0;
 }
