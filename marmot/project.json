@@ -1,0 +1,8 @@
+{
+    "name": "marmot",
+    "description": "Marmot Standard Library",
+    "author": "Baili Zhang",
+    "email": "1456938262@qq.com",
+    "private": false,
+    "licence": "Apache-2.0 license"
+}
