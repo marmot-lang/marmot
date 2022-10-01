@@ -2,9 +2,6 @@
 
 using namespace marmot;
 
-syntax_expr::syntax_expr(vector<char> *chs, int curr) {
-  this->chs = chs;
-  this->curr = curr;
-}
+syntax_expr::syntax_expr(std::string &chs, int curr) : chs(chs), curr(curr) {}
 
 int syntax_expr::getCurr() { return curr; }

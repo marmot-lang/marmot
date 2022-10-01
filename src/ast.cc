@@ -1,57 +1,44 @@
 #include "ast.h"
 #include "syntax_except.h"
 
+#include "llvm/IR/BasicBlock.h"
+#include "llvm/IR/Function.h"
+#include "llvm/IR/IRBuilder.h"
+#include "llvm/IR/LLVMContext.h"
+#include "llvm/IR/Module.h"
+
+#include <iostream>
+#include <llvm-10/llvm/IR/DerivedTypes.h>
+#include <llvm-10/llvm/IR/Type.h>
+#include <llvm-10/llvm/Support/raw_ostream.h>
+#include <string>
+
 using namespace marmot;
 
-ast::ast() {
-  chs = new vector<char>();
-  structs = new vector<struct_expr *>();
-  statics = new vector<static_expr *>();
-}
+ast::ast(std::string &filename)
+    : structs(new std::vector<struct_expr *>()),
+      statics(new std::vector<static_expr *>()), filename(filename) {}
 
 ast::~ast() {
-  delete chs;
   delete structs;
   delete statics;
 }
 
-void ast::append(char c) { chs->push_back(c); }
+void ast::add_struct_expr(struct_expr *expr) { structs->push_back(expr); }
+void ast::add_static_expr(static_expr *expr) { statics->push_back(expr); }
+void ast::add_func_expr(func_expr *expr) { funcs->push_back(expr); }
 
-void ast::parse() {
-  for (int i = 0; i < (*chs).size(); i++) {
-    if (is_same(chs, i, 's') && is_same(chs, i + 1, 't')) {
+void ast::to_llvm_ir() {
+  llvm::LLVMContext context;
+  llvm::IRBuilder<> builder(context);
+  llvm::Module *module = new llvm::Module(filename, context);
 
-      // parse struct
-      if (is_same(chs, i + 2, 'r')) {
-
-        struct_expr *stru = new struct_expr(chs, i);
-        stru->parse();
-        i = stru->getCurr();
-        structs->push_back(stru);
-
-      }
-
-      // parse static
-      else if (is_same(chs, i + 2, 'a')) {
-
-        static_expr *stati = new static_expr(chs, i);
-        stati->parse();
-        i = stati->getCurr();
-        statics->push_back(stati);
-      }
-
-    }
-    // parse func
-    else if (is_same(chs, i, 'f')) {
-      func_expr *func = new func_expr(chs, i);
-      func->parse();
-      i = func->getCurr();
-      funcs->push_back(func);
-
-    } else {
-      throw new syntax_except(chs, i);
-    }
+  for (struct_expr *stru_e : *structs) {
+    llvm::StructType *struct_type =
+        llvm::StructType::create(context, *(stru_e->identify()));
+    struct_type->setBody(builder.getInt32Ty());
+    struct_type->print(llvm::outs());
   }
-}
 
-void ast::toIR() {}
+  module->print(llvm::outs(), nullptr);
+}

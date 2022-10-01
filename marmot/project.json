@@ -1,6 +1,7 @@
 {
     "name": "marmot",
     "description": "Marmot Standard Library",
+    "target": "lib",
     "author": "Baili Zhang",
     "email": "1456938262@qq.com",
     "private": false,

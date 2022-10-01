@@ -1,29 +1,30 @@
-#pragma once
-
-#include <vector>
+#ifndef __MARMOT_AST_H__
+#define __MARMOT_AST_H__
 
 #include "func_expr.h"
+#include "header.h"
 #include "static_expr.h"
 #include "struct_expr.h"
-
-using namespace std;
 
 namespace marmot {
 class ast {
 private:
-  vector<char> *chs;
-  vector<struct_expr *> *structs;
-  vector<static_expr *> *statics;
-  vector<func_expr *> *funcs;
-  inline bool is_same(vector<char> *chs, int i, char c) {
-    return i < chs->size() && (*chs)[i] == c;
+  std::string &filename;
+  std::vector<struct_expr *> *structs;
+  std::vector<static_expr *> *statics;
+  std::vector<func_expr *> *funcs;
+  inline bool is_same(std::string &chs, int i, char c) {
+    return i < chs.length() && chs[i] == c;
   }
 
 public:
-  ast();
+  ast(std::string &filename);
   ~ast();
-  void append(char c);
-  void parse();
-  void toIR();
+  void add_struct_expr(struct_expr *expr);
+  void add_static_expr(static_expr *expr);
+  void add_func_expr(func_expr *expr);
+  void to_llvm_ir();
 };
 } // namespace marmot
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MARMOT_STATIC_EXPR_H__
+#define __MARMOT_STATIC_EXPR_H__
 
 #include "syntax_expr.h"
 
@@ -8,7 +9,9 @@ public:
   static_expr() = delete;
   static_expr(const static_expr &expr) = delete;
   static_expr &operator=(const static_expr &expr) = delete;
-  static_expr(vector<char> *chs, int curr);
+  static_expr(std::string &chs, int curr);
   void parse();
 };
 } // namespace marmot
+
+#endif

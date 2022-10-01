@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MARMOT_VERSION_H__
+#define __MARMOT_VERSION_H__
 
 #include <iostream>
 #include <string>
@@ -13,3 +14,5 @@ public:
   static void print();
 };
 } // namespace marmot
+
+#endif

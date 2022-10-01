@@ -8,7 +8,7 @@ public:
   func_expr() = delete;
   func_expr(const func_expr &expr) = delete;
   func_expr &operator=(const func_expr &expr) = delete;
-  func_expr(vector<char> *chs, int curr);
+  func_expr(std::string &chs, int curr);
   void parse();
 };
 } // namespace marmot

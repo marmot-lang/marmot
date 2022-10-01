@@ -1,21 +1,22 @@
-#pragma once
+#ifndef __MARMOT_SYNTAX_EXPR_H__
+#define __MARMOT_SYNTAX_EXPR_H__
 
-#include <vector>
-
-using namespace std;
+#include "header.h"
 
 namespace marmot {
 class syntax_expr {
 protected:
   int curr;
-  vector<char> *chs;
+  std::string &chs;
 
 public:
   syntax_expr() = delete;
   syntax_expr(const syntax_expr &expr) = delete;
   syntax_expr &operator=(const syntax_expr &expr) = delete;
-  syntax_expr(vector<char> *chs, int cur);
+  syntax_expr(std::string &chs, int cur);
   int getCurr();
   virtual void parse() = 0;
 };
 } // namespace marmot
+
+#endif
