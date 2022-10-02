@@ -1,6 +1,7 @@
 #ifndef __MARMOT_STRUCT_EXPR_H__
 #define __MARMOT_STRUCT_EXPR_H__
 
+#include "declare_variable_expr.h"
 #include "syntax_expr.h"
 #include "type_expr.h"
 
@@ -11,39 +12,24 @@ class struct_attr;
 class struct_expr : public syntax_expr {
 private:
   std::string *_identifier;
-  std::vector<std::string> *generic_types;
-  std::vector<struct_attr *> *_attrs;
+  std::vector<std::string *> _generic_type_names;
+  std::vector<declare_variable_expr *> _attrs;
 
 public:
-  struct_expr() = delete;
   struct_expr(const struct_expr &expr) = delete;
   struct_expr &operator=(const struct_expr &expr) = delete;
   struct_expr(std::string &chs, int curr);
   void parse();
   std::string *identifier();
-  std::vector<struct_attr *> *attrs();
+  std::vector<declare_variable_expr *> attrs();
 
   void print();
+  std::string generic_type_list_key(std::vector<type_expr *> types);
+  struct_expr *generate_concrete(std::vector<type_expr *> types, int id);
+  std::vector<type_expr *> all_concrete_struct_attr_type();
+
+  inline bool is_struct_template() { return !_generic_type_names.empty(); }
 };
-
-class struct_attr : public syntax_expr {
-private:
-  type_expr *_attr_type;
-  std::string *_attr_identifier;
-
-public:
-  struct_attr() = delete;
-  struct_attr(const struct_attr &expr) = delete;
-  struct_attr &operator=(const struct_attr &expr) = delete;
-  struct_attr(std::string &chs, int curr);
-  void parse();
-
-  void print();
-
-  inline type_expr *attr_type() { return _attr_type; };
-  inline std::string *attr_identifier() { return _attr_identifier; };
-};
-
 } // namespace marmot
 
 #endif

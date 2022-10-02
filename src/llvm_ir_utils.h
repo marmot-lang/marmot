@@ -41,7 +41,7 @@ public:
   llvm_ir_uitls(const llvm_ir_uitls &ir) = delete;
   llvm_ir_uitls &operator=(const llvm_ir_uitls &ir) = delete;
 
-  llvm::Type *find_type(std::string &type_name, llvm::IRBuilder<> &builder);
+  llvm::Type *find_raw_type(std::string &type_name, llvm::IRBuilder<> &builder);
 };
 } // namespace marmot
 

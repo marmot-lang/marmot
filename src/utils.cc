@@ -22,22 +22,18 @@ bool marmot::is_not_in(std::string &chs, int curr,
   return !is_in(chs, curr, cs);
 }
 
-bool marmot::is_in(std::string &chs, int curr, initializer_list<char> cs) {
-
-  std::unordered_set<char> set;
-
+bool marmot::is_in(std::string &chs, int curr, std::initializer_list<char> cs) {
   for (const char *itr = cs.begin(); itr != cs.end(); itr++) {
-    set.insert(*itr);
+    if (chs[curr] == (*itr)) {
+      return true;
+    }
   }
 
-  bool result = is_in(chs, curr, set);
-
-  std::unordered_set<char>().swap(set);
-
-  return result;
+  return false;
 }
 
-bool marmot::is_not_in(std::string &chs, int curr, initializer_list<char> cs) {
+bool marmot::is_not_in(std::string &chs, int curr,
+                       std::initializer_list<char> cs) {
   return !is_in(chs, curr, cs);
 }
 
@@ -52,26 +48,32 @@ int marmot::ignore_white_space(std::string &chs, int curr) {
   return curr;
 }
 
-bool marmot::is_not_white_space(std::string &chs, int i) {
-  return !is_write_space(chs, i);
+bool marmot::is_not_white_space(std::string &chs, int curr) {
+  return !is_write_space(chs, curr);
 }
 
-std::string *marmot::find_sequences_before(std::string &chs,
-                                           int sequences_begin,
-                                           initializer_list<char> cs) {
+std::string *
+marmot::find_sequences_before(std::string &chs, int sequences_begin,
+                              std::initializer_list<char> end_tokes) {
+  std::unordered_set<char> end_tokes_set;
+
+  for (const char *itr = end_tokes.begin(); itr != end_tokes.end(); itr++) {
+    end_tokes_set.insert(*itr);
+  }
+
+  return find_sequences_before(chs, sequences_begin, end_tokes_set);
+
+  std::unordered_set<char>().swap(end_tokes_set);
+}
+
+std::string *
+marmot::find_sequences_before(std::string &chs, int sequences_begin,
+                              std::unordered_set<char> &end_tokens) {
   int sequences_end = sequences_begin;
 
-  std::unordered_set<char> set;
-
-  for (const char *itr = cs.begin(); itr != cs.end(); itr++) {
-    set.insert(*itr);
-  }
-
-  while (is_not_in(chs, sequences_end, set)) {
+  while (is_not_in(chs, sequences_end, end_tokens)) {
     sequences_end++;
   }
-
-  std::unordered_set<char>().swap(set);
 
   int identifier_len = sequences_end - sequences_begin;
   std::string *sequence = new std::string();
@@ -128,4 +130,12 @@ bool marmot::is_same(std::string &s1, std::string &s2) {
   }
 
   return true;
+}
+
+bool marmot::is_same(std::string &chs, int curr, char c) {
+  return curr < chs.length() && chs[curr] == c;
+}
+
+bool marmot::is_not_same(std::string &chs, int curr, char c) {
+  return !is_same(chs, curr, c);
 }

@@ -2,6 +2,7 @@
 #include "header.h"
 #include "utils.h"
 #include <iostream>
+#include <llvm-10/llvm/Support/raw_ostream.h>
 
 using namespace marmot;
 
@@ -38,7 +39,14 @@ ast *source_file::to_ast() {
       struct_expr *stru = new struct_expr(_src, identifier_begin);
       stru->parse();
       curr = stru->getCurr();
-      marmot_ast->add_struct_expr(stru);
+
+      marmot_ast->add_concrete_struct_if_not_exist(stru);
+
+      if (stru->is_struct_template()) {
+        marmot_ast->add_generic_struct_expr(stru);
+      } else {
+        marmot_ast->add_struct_expr(stru);
+      }
 
     } else if (is_same_sequences(_src, curr, tokens::STATIC)) {
 
@@ -49,10 +57,11 @@ ast *source_file::to_ast() {
 
     } else if (is_same_sequences(_src, curr, tokens::FUNC)) {
 
-      //   func_expr *func = new func_expr(src, i);
-      //   func->parse();
-      //   i = func->getCurr();
-      //   funcs->push_back(func);
+      int identifier_begin = curr + tokens::FUNC.length();
+      func_expr *func = new func_expr(_src, identifier_begin);
+      func->parse();
+      curr = func->getCurr();
+      marmot_ast->add_func_expr(func);
 
     } else {
       if (is_not_end(_src, curr)) {
@@ -65,7 +74,10 @@ ast *source_file::to_ast() {
 }
 
 void source_file::print() {
-  std::cout << "Source file: " << _abs_path.filename() << std::endl
-            << std::endl;
-  std::cout << _src << std::endl;
+  llvm::outs() << "Source file: ";
+  llvm::outs().changeColor(llvm::raw_ostream::GREEN);
+  llvm::outs() << "\"" << _abs_path.filename() << "\"";
+  llvm::outs().resetColor();
+  llvm::outs() << "\n\n";
+  llvm::outs() << _src << "\n";
 }

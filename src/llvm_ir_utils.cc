@@ -19,11 +19,14 @@ llvm_ir_uitls::llvm_ir_uitls() {
   int_types.insert(std::make_pair(tokens::U_INT128, _build_int128));
 }
 
-llvm::Type *llvm_ir_uitls::find_type(std::string &type_name,
-                                     llvm::IRBuilder<> &builder) {
+llvm::Type *llvm_ir_uitls::find_raw_type(std::string &type_name,
+                                         llvm::IRBuilder<> &builder) {
   std::unordered_map<std::string,
                      std::function<llvm::Type *(llvm::IRBuilder<> &)>>::iterator
       itr = int_types.find(type_name);
 
-  return itr->second(builder);
+  if (itr._M_cur != nullptr) {
+    return itr->second(builder);
+  }
+  return nullptr;
 }

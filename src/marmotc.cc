@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 
     if (std::filesystem::exists(absolute) &&
         !std::filesystem::is_directory(absolute)) {
-      ifstream file_stream = std::ifstream(absolute, ios_base::in);
+      std::ifstream file_stream = std::ifstream(absolute, std::ios_base::in);
 
       source_file *file = new source_file(absolute);
 
