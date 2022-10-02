@@ -34,6 +34,8 @@ void check_sequences(std::string &chs, int curr, std::string target);
 
 bool is_same_sequences(std::string &chs, int curr, std::string target);
 
+bool is_same(std::string &s1, std::string &s2);
+
 } // namespace marmot
 
 #endif

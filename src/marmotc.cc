@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 
 #include "header.h"
@@ -21,6 +22,7 @@ int main(int argc, char *argv[]) {
     if (std::filesystem::exists(absolute) &&
         !std::filesystem::is_directory(absolute)) {
       ifstream file_stream = std::ifstream(absolute, ios_base::in);
+
       source_file *file = new source_file(absolute);
 
       while (!file_stream.eof()) {
@@ -33,8 +35,13 @@ int main(int argc, char *argv[]) {
         file->append(c);
       }
 
+      file->print();
+
       try {
-        file->to_ast()->to_llvm_ir();
+        ast *marmot_ast = file->to_ast();
+        marmot_ast->print();
+        std::cout << std::endl;
+        marmot_ast->to_llvm_ir();
       } catch (syntax_except *e) {
         std::cout << std::endl << "Syntax Exception in: " << std::endl;
         std::cout << *(e->message()) << std::endl;

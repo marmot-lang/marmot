@@ -7,7 +7,7 @@
 namespace marmot {
 class type_expr : public syntax_expr {
 private:
-  std::string *_identify;
+  std::string *_identifier;
   std::vector<std::string *> *type_names;
 
 public:
@@ -16,6 +16,10 @@ public:
   type_expr &operator=(const type_expr &expr) = delete;
   type_expr(std::string &chs, int curr);
   void parse();
+
+  void print();
+
+  inline std::string *identifier() { return _identifier; }
 };
 } // namespace marmot
 

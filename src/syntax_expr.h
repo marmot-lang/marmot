@@ -16,6 +16,7 @@ public:
   syntax_expr(std::string &chs, int cur);
   int getCurr();
   virtual void parse() = 0;
+  virtual void print() = 0;
 };
 } // namespace marmot
 

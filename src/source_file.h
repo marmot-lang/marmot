@@ -7,9 +7,8 @@
 namespace marmot {
 class source_file {
 private:
-  std::string filename;
-  std::filesystem::path &source_path;
-  std::string src;
+  std::filesystem::path &_abs_path;
+  std::string _src;
 
 public:
   source_file() = delete;
@@ -21,6 +20,8 @@ public:
 
   void append(char c);
   ast *to_ast();
+
+  void print();
 };
 } // namespace marmot
 

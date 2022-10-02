@@ -73,10 +73,10 @@ std::string *marmot::find_sequences_before(std::string &chs,
 
   std::unordered_set<char>().swap(set);
 
-  int identify_len = sequences_end - sequences_begin;
+  int identifier_len = sequences_end - sequences_begin;
   std::string *sequence = new std::string();
 
-  for (int i = 0; i < identify_len; i++) {
+  for (int i = 0; i < identifier_len; i++) {
     sequence->push_back(chs[sequences_begin + i]);
   }
 
@@ -112,6 +112,19 @@ bool marmot::is_same_sequences(std::string &chs, int curr, std::string target) {
     if ((*sequences)[i] != target[i]) {
       return false;
     }
+  }
+
+  return true;
+}
+
+bool marmot::is_same(std::string &s1, std::string &s2) {
+  if (s1.length() != s2.length())
+    return false;
+
+  int len = s1.length();
+  for (int i = 0; i < len; i++) {
+    if (s1[i] == s2[i])
+      return false;
   }
 
   return true;

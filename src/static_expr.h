@@ -11,6 +11,8 @@ public:
   static_expr &operator=(const static_expr &expr) = delete;
   static_expr(std::string &chs, int curr);
   void parse();
+
+  void print();
 };
 } // namespace marmot
 

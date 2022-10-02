@@ -24,6 +24,18 @@ static string IF = "if";
 static string DELETE = "delete";
 static string RET = "ret";
 
+static string BOOL = "bool";
+static string INT8 = "int8";
+static string U_INT8 = "u_int8";
+static string INT16 = "int16";
+static string U_INT16 = "u_int16";
+static string INT32 = "int32";
+static string U_INT32 = "u_int32";
+static string INT64 = "int64";
+static string U_INT64 = "u_int64";
+static string INT128 = "int128";
+static string U_INT128 = "u_int128";
+
 static string AND = "&&";
 static string OR = "||";
 static string DOUBLE_COLON = "::";
