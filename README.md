@@ -1,5 +1,12 @@
 # Marmot Programming Language
 
+The Marmot programming language is designed to implement a programming paradigm that separates data and functions, and has the characteristics of no GC, simple memory structure, and no life cycle. Marmot's goal is not to replace any programming language, like C or C++. Unlike Rust, which can guarantee memory safety at compile time, Marmot requires the user to manually release the allocated memory.
+
+Comparison with other programming languages：
+
+**C programming language**
+
+
 ## Grammar
 
 **Data Type**
