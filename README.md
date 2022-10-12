@@ -1,3 +1,5 @@
+[中文文档](./README-ZH-CN.md)
+
 # Marmot Programming Language
 
 The Marmot programming language is designed to implement a programming paradigm that separates data and functions, and has the characteristics of no GC, simple memory structure, and no life cycle. Marmot's goal is not to replace any programming language, like C or C++. Unlike Rust, which can guarantee memory safety at compile time, Marmot requires the user to manually release the allocated memory.
@@ -6,89 +8,46 @@ Comparison with other programming languages：
 
 **C programming language**
 
+- Marmot supports generics
+- Marmot provides more data structures, like linked lists, hash tables, etc
+- Marmot supports struct inheritance
+- Marmot provides package management tools
 
-## Grammar
+**C++ programming language**
 
-**Data Type**
+- Marmot does not support object-oriented programming
+- Marmot has simpler memory structure
+- Marmot provides a unified package management tool
+- Marmot has a better module implementation
 
-- Integer: `int8`, `u_int8`, `int16`, `u_int16`, `int32`, `u_int32`, `int64`, `u_int64`, `int128`, `u_int128`
-- Charactor: `char`
-- Float: `float`, `double`
-- Function: `func`
+**Rust programming language**
 
-**Inner Type**
+- Marmot does not support compile-time memory safety checks
+- Marmot needs to free memory manually
+- Marmot is easier to learn
 
-`string`
+## Marmot Grammar
 
-**Struct**
+### Type System
 
-```marmot
-struct Person {
-    name: string
-    age: u_int8
-}
-```
+#### Integer
 
-**Inheritance**
+- `int8`: 8-bit signed integer
+- `int16`: 16-bit signed integer
+- `int32`: 32-bit signed integer
+- `int64`: 64-bit signed integer
+- `int128`: 128-bit signed integer
+- `u_int8`: 8-bit unsigned integer
+- `u_int16`: 16-bit unsigned integer
+- `u_int32`: 32-bit unsigned integer
+- `u_int64`: 64-bit unsigned integer
+- `u_int128`: 128-bit unsigned integer
 
-```marmot
-struct Teacher extends Person {
-    school: string
-}
-```
+#### Floating Point Type
 
-**Function**
+- `float`: 32-bit floating point type
+- `double`: 64-bit floating point type
 
-```marmot
-func sayHallo[Human]() {
-    printl("I am {}, my age is {}", _.name, _.age);
-}
+#### Boolean Type
 
-func sayHallo[Teacher]() {
-    printl("I am {}, my age is {}, I am a teacher of {}", _.name, _.age, _.school);
-}
-```
-
-**New and Inoke Method**
-
-```marmot
-Person p = new Person("Tom", 18);
-p -> sayHallo();
-
-Teacher t = new Teacher();
-t.name("Tony");
-t.age(32);
-t.school("ECUST");
-
-t -> sayHallo();
-```
-
-**Copy Function**
-
-```marmot
-func sayHallo0 = func sayHallo[Teacher];
-
-t -> sayHallo0();
-```
-
-**Lambda**
-
-```marmot
-func sayHallo1 = [Teacher]() -> {
-    printl("I am {}, my age is {}, I am a teacher of {}", _.name, _.age, _.school);
-}
-```
-
-**Name Space**
-
-```marmot
-namespace MarmotGroup {
-    func addMember[Group](member: Member) {
-        _.members -> add(member);
-    }
-}
-
-Group g = new Group();
-Member m = new Member();
-g -> MarmotGroup::addMember(m);
-```
+- `bool`: values are `true` and `false`

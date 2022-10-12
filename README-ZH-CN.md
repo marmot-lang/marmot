@@ -313,7 +313,23 @@ func main[](u_int32 argc, String[] argv) : u_int32 {
 }
 ```
 
+**Lambda 表达式**
 
+```marmot
+func sayHallo = [Teacher]() -> {
+    printl("I am {}, my age is {}, I am a teacher of {}", _.name, _.age, _.school);
+}
+```
+
+```marmot
+func sayHallo0 = func sayHallo[Teacher];
+```
+
+**命名空间**
+
+```marmot
+namespace MarmotGroup;
+```
 
 
 
