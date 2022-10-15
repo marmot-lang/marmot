@@ -1,0 +1,55 @@
+namespace marmot::std;
+
+struct LinkedList<T> {
+    Node<T> header;
+    Node<T> tail;
+}
+
+struct Node<T> {
+    Node<T> next;
+    Node<T> prev;
+    T value;
+}
+
+func add[LinkedList<T>](T value) : void {
+    Node<T> n = new Node();
+    n.value = value;
+
+    match _.header {
+        header -> {
+            Node<T> p = header;
+
+            while(p.next.non_null) {
+                p = p.next;
+            }
+
+            p.next = n;
+            n.prev = p;
+
+            _.tail = n;
+        }
+
+        null -> {
+            _.header = n;
+            _.tail = n;
+        }
+    }
+}
+
+func removeLast[LinkedList<T>]() : T {
+    T val = null;
+
+    match _.tail {
+        tail -> {
+            Node<T> n = _.tail;
+            val = n.val;
+            
+            _.tail = n.prev;
+            _.tail.next = null;
+
+            delete n;
+        }
+    }
+
+    ret val;
+}

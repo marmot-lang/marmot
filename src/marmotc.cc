@@ -3,10 +3,10 @@
 #include <fstream>
 #include <iostream>
 
-#include "header.h"
-#include "source_file.h"
-#include "syntax_except.h"
-#include "version.h"
+#include "Header.h"
+#include "SourceFile.h"
+#include "SyntaxExcept.h"
+#include "Version.h"
 
 using namespace marmot;
 
@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
         !std::filesystem::is_directory(absolute)) {
       std::ifstream file_stream = std::ifstream(absolute, std::ios_base::in);
 
-      source_file *file = new source_file(absolute);
+      SourceFile *file = new SourceFile(absolute);
 
       while (!file_stream.eof()) {
         char c = file_stream.get();
@@ -38,11 +38,11 @@ int main(int argc, char *argv[]) {
       file->print();
 
       try {
-        ast *marmot_ast = file->to_ast();
+        AST *marmot_ast = file->to_ast();
         marmot_ast->print();
         std::cout << std::endl;
         marmot_ast->to_llvm_ir();
-      } catch (syntax_except *e) {
+      } catch (SyntaxExcept *e) {
         std::cout << std::endl << "Syntax Exception in: " << std::endl;
         std::cout << *(e->message()) << std::endl;
       }

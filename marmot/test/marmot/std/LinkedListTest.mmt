@@ -1,0 +1,14 @@
+import marmot::std::linked_list;
+import marmot::std::add[linked_list];
+import marmot::std::remove_last[linked_list];
+
+
+func test01[]() : void {
+    u_int32 n = 32;
+
+    linked_list<u_int32> list = new linked_list<u_int32>();
+    list.add(n);
+    u_int32 val = list.remove_last();
+    
+    assert val == n;
+}
