@@ -291,7 +291,7 @@ func do[]() {
 
 **Main 函数**
 
-Main 函数是程序的入口函数，是一个通用函数，如下：
+Main 函数是程序的入口函数，如下：
 
 ```marmot
 func main[](u_int32 argc, String[] argv) : u_int32 {
