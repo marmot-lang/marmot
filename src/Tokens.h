@@ -21,16 +21,16 @@ static std::string DELETE = "delete";
 static std::string RET = "ret";
 
 static std::string BOOL = "bool";
-static std::string INT8 = "int8";
-static std::string U_INT8 = "u_int8";
-static std::string INT16 = "int16";
-static std::string U_INT16 = "u_int16";
-static std::string INT32 = "int32";
-static std::string U_INT32 = "u_int32";
-static std::string INT64 = "int64";
-static std::string U_INT64 = "u_int64";
-static std::string INT128 = "int128";
-static std::string U_INT128 = "u_int128";
+static std::string INT8 = "i8";
+static std::string U_INT8 = "u8";
+static std::string INT16 = "i16";
+static std::string U_INT16 = "u16";
+static std::string INT32 = "i32";
+static std::string U_INT32 = "u32";
+static std::string INT64 = "i64";
+static std::string U_INT64 = "u64";
+static std::string INT128 = "i128";
+static std::string U_INT128 = "u128";
 
 static std::string AND = "&&";
 static std::string OR = "||";

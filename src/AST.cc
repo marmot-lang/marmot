@@ -19,7 +19,7 @@ AST::AST(std::filesystem::path &abs_path) {
   _llvm_ir_os = new llvm::raw_fd_ostream("build.ll", _ec);
 }
 
-void AST::to_llvm_ir() {
+void AST::toLlvmIr() {
   IrUitls *ir_uitls = new IrUitls();
 
   llvm::LLVMContext context;

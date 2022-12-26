@@ -32,16 +32,16 @@ Comparison with other programming languages：
 
 #### Integer
 
-- `int8`: 8-bit signed integer
-- `int16`: 16-bit signed integer
-- `int32`: 32-bit signed integer
-- `int64`: 64-bit signed integer
-- `int128`: 128-bit signed integer
-- `u_int8`: 8-bit unsigned integer
-- `u_int16`: 16-bit unsigned integer
-- `u_int32`: 32-bit unsigned integer
-- `u_int64`: 64-bit unsigned integer
-- `u_int128`: 128-bit unsigned integer
+- `i8`: 8-bit signed integer
+- `i16`: 16-bit signed integer
+- `i32`: 32-bit signed integer
+- `i64`: 64-bit signed integer
+- `i128`: 128-bit signed integer
+- `u8`: 8-bit unsigned integer
+- `u16`: 16-bit unsigned integer
+- `u32`: 32-bit unsigned integer
+- `u64`: 64-bit unsigned integer
+- `u128`: 128-bit unsigned integer
 
 #### Floating Point Type
 
